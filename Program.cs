@@ -48,6 +48,12 @@ builder.Services.AddSingleton<ISqlDataAccess, SqlDataAccess>();
 builder.Services.AddScoped<ICustomerIdDetailsDataService, CustomerIdDetailsDataService>();
 builder.Services.AddScoped<ICustomerOtherDocumentDataService, CustomerOtherDocumentDataService>();
 builder.Services.AddScoped<ICustomer_mstDataService, Customer_mstDataService>();
+builder.Services.AddScoped<IRateSheetDataService, RateSheetDataService>();
+builder.Services.AddScoped<ICurrencyDataService, CurrencyDataService>();
+builder.Services.AddScoped<IDropDwnListDataService, DropDwnListDataService>();
+builder.Services.AddScoped<IForexHederDataService, ForexHederDataService>();
+builder.Services.AddScoped<IApplicationErorrLogService, ApplicationErorrLogService>();
+builder.Services.AddScoped<IPromoActivityDataService, PromoActivityDataService>();
 
 
 var app = builder.Build();
