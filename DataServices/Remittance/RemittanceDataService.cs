@@ -303,63 +303,63 @@ namespace ForexDataService
                 throw ex;
             }
         }
-        public async Task<RemitResponse> SaveRemittancePay(RemittancePayment remitpay)
-        {
-            var remitResponse = new RemitResponse();
-            try
-            {
-                string sql = @"USP_VN_TRN_Insert_PAYMODE";
+        //public async Task<RemitResponse> SaveRemittancePay(RemittancePayment remitpay)
+        //{
+        //    var remitResponse = new RemitResponse();
+        //    try
+        //    {
+        //        string sql = @"USP_VN_TRN_Insert_PAYMODE";
                 
-                var parameters = new DynamicParameters();
-                parameters.Add("@PortalCode", "00001", DbType.String);
-                parameters.Add("@OrgCode", "00001", DbType.String);
-                parameters.Add("@MenuCode", "00000", DbType.String);
-                parameters.Add("@RefNo", remitpay.RefNo, DbType.String);
-                parameters.Add("@TranDate", remitpay.TranDate, DbType.DateTime);
-                parameters.Add("@PayRefNo", remitpay.PayRefNo, DbType.String);
-                parameters.Add("@UserCode", remitpay.UserCode, DbType.String);
+        //        var parameters = new DynamicParameters();
+        //        parameters.Add("@PortalCode", "00001", DbType.String);
+        //        parameters.Add("@OrgCode", "00001", DbType.String);
+        //        parameters.Add("@MenuCode", "00000", DbType.String);
+        //        parameters.Add("@RefNo", remitpay.RefNo, DbType.String);
+        //        parameters.Add("@TranDate", remitpay.TranDate, DbType.DateTime);
+        //        parameters.Add("@PayRefNo", remitpay.PayRefNo, DbType.String);
+        //        parameters.Add("@UserCode", remitpay.UserCode, DbType.String);
 
-                parameters.Add("@PayCode", remitpay.PayCode, DbType.String);
-                parameters.Add("@AccountCode", remitpay.AccountCode, DbType.String);
-                parameters.Add("@PayCurCode", remitpay.PayCurCode, DbType.String);
-                parameters.Add("@PayAmount", remitpay.PayAmount, DbType.Decimal);
-                parameters.Add("@Rate", remitpay.Rate, DbType.Decimal);
-                parameters.Add("@PaidAmount", remitpay.PaidAmount, DbType.Decimal);
-                parameters.Add("@BalAmount", remitpay.BalAmount, DbType.Decimal);
-                parameters.Add("@Discount", remitpay.Discount, DbType.Decimal);
-                parameters.Add("@Pay_ID", remitpay.Pay_ID, DbType.Int32);
-                parameters.Add("@PayCodeName", remitpay.PayCodeName, DbType.String);
-                parameters.Add("@BankCode", remitpay.BankCode, DbType.String);
-                parameters.Add("@BankName", remitpay.BankName, DbType.String);
-                parameters.Add("@CardCharge", remitpay.CardCharge, DbType.Decimal);
-                parameters.Add("@CheqDt", remitpay.CheqDt, DbType.DateTime);
-                parameters.Add("@USDAmount", remitpay.USDAmount, DbType.Decimal);
-                parameters.Add("@TotalDeno", remitpay.TotalDeno, DbType.Decimal);
-                parameters.Add("@TotalDenoAmt", remitpay.TotalDenoAmt, DbType.Decimal);
-                parameters.Add("@BalanceCashPay", remitpay.BalanceCashPay, DbType.Decimal);     
+        //        parameters.Add("@PayCode", remitpay.PayCode, DbType.String);
+        //        parameters.Add("@AccountCode", remitpay.AccountCode, DbType.String);
+        //        parameters.Add("@PayCurCode", remitpay.PayCurCode, DbType.String);
+        //        parameters.Add("@PayAmount", remitpay.PayAmount, DbType.Decimal);
+        //        parameters.Add("@Rate", remitpay.Rate, DbType.Decimal);
+        //        parameters.Add("@PaidAmount", remitpay.PaidAmount, DbType.Decimal);
+        //        parameters.Add("@BalAmount", remitpay.BalAmount, DbType.Decimal);
+        //        parameters.Add("@Discount", remitpay.Discount, DbType.Decimal);
+        //        parameters.Add("@Pay_ID", remitpay.Pay_ID, DbType.Int32);
+        //        parameters.Add("@PayCodeName", remitpay.PayCodeName, DbType.String);
+        //        parameters.Add("@BankCode", remitpay.BankCode, DbType.String);
+        //        parameters.Add("@BankName", remitpay.BankName, DbType.String);
+        //        parameters.Add("@CardCharge", remitpay.CardCharge, DbType.Decimal);
+        //        parameters.Add("@CheqDt", remitpay.CheqDt, DbType.DateTime);
+        //        parameters.Add("@USDAmount", remitpay.USDAmount, DbType.Decimal);
+        //        parameters.Add("@TotalDeno", remitpay.TotalDeno, DbType.Decimal);
+        //        parameters.Add("@TotalDenoAmt", remitpay.TotalDenoAmt, DbType.Decimal);
+        //        parameters.Add("@BalanceCashPay", remitpay.BalanceCashPay, DbType.Decimal);     
 
-                var rval = await Db.ExecuteAsyncStoredProcedure<string>(sql, parameters);
+        //        var rval = await Db.ExecuteAsyncStoredProcedure<string>(sql, parameters);
 
-                if (rval == -1)
-                {
-                    remitResponse.RefNo = remitpay.RefNo; 
-                    remitResponse.StatusMesage = "Saved Successfully";
-                    remitResponse.IsSucess = true;
-                }
-                else
-                {
-                    remitResponse.RefNo = string.Empty;
-                    remitResponse.StatusMesage = "Data not Saved!!!";
-                    remitResponse.IsSucess = false;
+        //        if (rval == -1)
+        //        {
+        //            remitResponse.RefNo = remitpay.RefNo; 
+        //            remitResponse.StatusMesage = "Saved Successfully";
+        //            remitResponse.IsSucess = true;
+        //        }
+        //        else
+        //        {
+        //            remitResponse.RefNo = string.Empty;
+        //            remitResponse.StatusMesage = "Data not Saved!!!";
+        //            remitResponse.IsSucess = false;
 
-                }
-                return remitResponse;
-            }
-            catch (Exception ex)
-            {
-                throw ex;
-            }
-        }
+        //        }
+        //        return remitResponse;
+        //    }
+        //    catch (Exception ex)
+        //    {
+        //        throw ex;
+        //    }
+        //}
        
       
        
@@ -501,7 +501,7 @@ namespace ForexDataService
     public interface IRemittanceDataService
     {
         Task<RemitResponse> SaveRemittance(Remittance remit);
-        Task<RemitResponse> SaveRemittancePay(RemittancePayment remitpay);
+       // Task<RemitResponse> SaveRemittancePay(RemittancePayment remitpay);
         Task<Organization> GetOrganization(string corrcode);
         Task<IEnumerable<DropDwnListIdText>> GetBenefBankBranchSearch(BenefBankBranchSearch benefBankBranchSearch);
         Task<IEnumerable<DropDwnListIdText>> GetBenefBankSearch(BenefBankSearch benefBankSearch);
