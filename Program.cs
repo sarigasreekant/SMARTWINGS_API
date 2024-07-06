@@ -48,6 +48,10 @@ builder.Services.AddSingleton<ISqlDataAccess, SqlDataAccess>();
 builder.Services.AddScoped<ICustomerIdDetailsDataService, CustomerIdDetailsDataService>();
 builder.Services.AddScoped<ICustomerOtherDocumentDataService, CustomerOtherDocumentDataService>();
 builder.Services.AddScoped<ICustomer_mstDataService, Customer_mstDataService>();
+builder.Services.AddScoped<IUserMstDataService, UserMstDataService>();
+builder.Services.AddScoped<IRemittanceDataService, RemittanceDataService>();
+builder.Services.AddScoped<IRemServiceProfileDataService, RemServiceProfileDataService>();
+builder.Services.AddScoped<IApplicationErorrLogService, ApplicationErorrLogService>();
 
 
 var app = builder.Build();

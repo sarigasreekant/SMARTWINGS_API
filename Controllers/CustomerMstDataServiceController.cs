@@ -66,7 +66,7 @@ namespace DHBForexAPI
         }
         [HttpPost]
         [Route("SaveCustomer")]
-        public async Task<ActionResult<CustomerResponse>> SaveCustomer(CustomerDTO customerdoto)
+        public async Task<ActionResult<CustomerResponse>> SaveCustomer(CustomerDTOMobile customerdoto)
         {
             try
             {

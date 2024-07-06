@@ -20,32 +20,35 @@ namespace ForexDataService
         {
             
             string sql = @"SELECT *
-                              FROM customer_mst  ";
+                              FROM customer_mst where Cust_reg_module='M'";
 
             DynamicParameters parameter = new DynamicParameters();
             var DataList = await Db.QueryAsync<Customer_mst>(sql, parameter);
-
-
-
-
 
             return DataList.ToList();
         }
         public async Task<Customer_mst> GetCustomerByID(string Custcode)
         {
-            string sql = @"SELECT Custcode, Custtype,CustomerGroup, Name1, Name2, Name3, Cell1, Cell2, Phone, Gender, Dob, Adrees1, Adrees2, Place, 
+            try
+            {
+                string sql = @"SELECT Custcode, Custtype,CustomerGroup, Name1, Name2, Name3, Cell1, Cell2, Phone, Gender, Dob, Adrees1, Adrees2, Place, 
                             Street, City, State, Concode, Country, Pobox, Nationcode, Nationality, Profession, Mail, Fax, Activeflg, Userid, 
                             Branchcode, Company, Photo, Amldoc_collected, Risktype, Amltype, Aml_auth, Aml_auth_user, Remarks, Remark2, Regdate,
                             PEP, Allow_Forex, Allow_Remit, Allow_Incoming, Allow_Mobile, Residence, FullName, IdTypeCode, IdType, IdNo, IssueDate, 
-                            ExpDate, Issueplace, ImageFront, ImageBack, ID_Activeflg, IssueContcode, ID_Remarks, Idcollected, Name4, Occupation
+                            ExpDate, Issueplace, ImageFront, ImageBack, ID_Activeflg, IssueContcode, ID_Remarks, Idcollected, Name4
                               FROM customer_mst WHERE Custcode= @Custcode ";
 
-            var parameters = new DynamicParameters();
-            parameters.Add("@Custcode", Custcode, DbType.String);
+                var parameters = new DynamicParameters();
+                parameters.Add("@Custcode", Custcode, DbType.String);
 
-            var Data = await Db.QueryFirstOrDefaultAsync<Customer_mst>(sql, parameters);
+                var Data = await Db.QueryFirstOrDefaultAsync<Customer_mst>(sql, parameters);
 
-            return Data;
+                return Data;
+            }
+            catch(Exception ex) 
+            {
+                throw ex;
+            }
         }
         public async Task<IEnumerable<Customer_mst>> Customer_mstSearch(string CustCode, string Mobile, string name, string IdNo)
         {

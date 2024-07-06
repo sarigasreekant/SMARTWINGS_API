@@ -14,7 +14,7 @@ namespace ForexDataService
         {
             this.unitOfWork = _unitOfWork;
         }
-        public async Task<CustomerResponse> SaveCustomer(CustomerDTO customer_mst)
+        public async Task<CustomerResponse> SaveCustomer(CustomerDTOMobile customer_mst)
         {
             var customerResponse = new CustomerResponse();
             string Custcode = ""; 
@@ -23,8 +23,6 @@ namespace ForexDataService
             try
             {
                 string sql = @"USP_VN_MAS_CUSTOMER";
-
-
 
 
                 Custcode = await GenerateCustCode(customer_mst.Custtype.ToUpper());
@@ -37,74 +35,74 @@ namespace ForexDataService
 
                 var parameters = new DynamicParameters();
                 parameters.Add("@Custcode", Custcode.Trim(), DbType.String);
-                parameters.Add("@Custtype", customer_mst.Custtype.ToUpper(), DbType.String);
+                parameters.Add("@Custtype", "I", DbType.String);
                 parameters.Add("@CustomerGroup", customer_mst.CustomerGroup.ToUpper(), DbType.String);
                 parameters.Add("@Name1", customer_mst.Name1.ToUpper(), DbType.String);
                 parameters.Add("@Name2", customer_mst.Name2.ToUpper(), DbType.String);
                 parameters.Add("@Name3", customer_mst.Name3.ToUpper(), DbType.String);
-                parameters.Add("@Name4", customer_mst.Name4.ToUpper(), DbType.String);
+                parameters.Add("@Name4", "", DbType.String);
                 parameters.Add("@Cell1", customer_mst.Cell1, DbType.String);
-                parameters.Add("@Cell2", customer_mst.Cell2, DbType.String);
-                parameters.Add("@Phone", customer_mst.Phone, DbType.String);
+                parameters.Add("@Cell2", "", DbType.String);
+                parameters.Add("@Phone", "", DbType.String);
                 parameters.Add("@Gender", customer_mst.Gender, DbType.String);
                 parameters.Add("@Dob", customer_mst.Dob, DbType.DateTime);
                 parameters.Add("@Adrees1", customer_mst.Adrees1.ToUpper(), DbType.String);
                 parameters.Add("@Adrees2", customer_mst.Adrees2.ToUpper(), DbType.String);
-                parameters.Add("@Place", customer_mst.Place.ToUpper(), DbType.String);
-                parameters.Add("@Street", customer_mst.Street.ToUpper(), DbType.String);
-                parameters.Add("@City", customer_mst.City.ToUpper(), DbType.String);
-                parameters.Add("@State", customer_mst.State.ToUpper(), DbType.String);
+                parameters.Add("@Place", "", DbType.String);
+                parameters.Add("@Street", "", DbType.String);
+                parameters.Add("@City", "", DbType.String);
+                parameters.Add("@State", "", DbType.String);
                 parameters.Add("@Concode", customer_mst.Concode, DbType.String);
-                parameters.Add("@Country", customer_mst.Country.ToUpper(), DbType.String);
-                parameters.Add("@Pobox", customer_mst.Pobox.ToUpper(), DbType.String);
+                parameters.Add("@Country", "", DbType.String);
+                parameters.Add("@Pobox", "", DbType.String);
                 parameters.Add("@Nationcode", customer_mst.Nationcode, DbType.String);
                 parameters.Add("@Nationality", customer_mst.Nationality, DbType.String);
                 parameters.Add("@Profession", customer_mst.Profession, DbType.String);
                 parameters.Add("@Mail", customer_mst.Mail, DbType.String);
-                parameters.Add("@Fax", customer_mst.Fax, DbType.String);
-                parameters.Add("@Activeflg", customer_mst.Activeflg.ToUpper(), DbType.String);
+                parameters.Add("@Fax","", DbType.String);
+                parameters.Add("@Activeflg","Y", DbType.String);
                 parameters.Add("@Userid", customer_mst.Userid.ToUpper(), DbType.String);
                 parameters.Add("@Branchcode", customer_mst.Branchcode.ToUpper(), DbType.String);
                 parameters.Add("@Company", customer_mst.Company.ToUpper(), DbType.String);
                 parameters.Add("@Photo", customer_mst.Photo, DbType.String);
-                parameters.Add("@Amldoc_collected", customer_mst.Amldoc_collected, DbType.String);
-                parameters.Add("@Risktype", customer_mst.Risktype, DbType.String);
-                parameters.Add("@Amltype", customer_mst.Amltype, DbType.String);
-                parameters.Add("@Aml_auth", customer_mst.Aml_auth, DbType.String);
-                parameters.Add("@Aml_auth_user", customer_mst.Aml_auth_user, DbType.String);
-                parameters.Add("@Remarks", customer_mst.Remarks.ToUpper(), DbType.String);
-                parameters.Add("@Remark2", customer_mst.Remark2.ToUpper(), DbType.String);                
+                parameters.Add("@Amldoc_collected", "N", DbType.String);
+                parameters.Add("@Risktype", "LOW", DbType.String);
+                parameters.Add("@Amltype", "LOW", DbType.String);
+                parameters.Add("@Aml_auth", "N", DbType.String);
+                parameters.Add("@Aml_auth_user", "", DbType.String);
+                parameters.Add("@Remarks", "", DbType.String);
+                parameters.Add("@Remark2", "", DbType.String);                
                 parameters.Add("@Regdate", servertime, DbType.DateTime);
                
-                parameters.Add("@PEP", customer_mst.PEP.ToUpper(), DbType.String);
-                parameters.Add("@Allow_Forex", customer_mst.Allow_Forex, DbType.Boolean);
-                parameters.Add("@Allow_Remit", customer_mst.Allow_Remit, DbType.Boolean);
-                parameters.Add("@Allow_Incoming", customer_mst.Allow_Incoming, DbType.Boolean);
-                parameters.Add("@Allow_Mobile", customer_mst.Allow_Mobile, DbType.Boolean);
-                parameters.Add("@Residence", customer_mst.Residence, DbType.String);
+                parameters.Add("@PEP", "N", DbType.String);
+                parameters.Add("@Allow_Forex", true, DbType.Boolean);
+                parameters.Add("@Allow_Remit", true, DbType.Boolean);
+                parameters.Add("@Allow_Incoming", true, DbType.Boolean);
+                parameters.Add("@Allow_Mobile", true, DbType.Boolean);
+                parameters.Add("@Residence", "", DbType.String);
 
-                parameters.Add("@Cust_reg_module", customer_mst.Cust_reg_module, DbType.String);
-                parameters.Add("@Cust_reg_UserId", customer_mst.Cust_reg_UserId, DbType.String);
-                parameters.Add("Cust_reg_date", servertime, DbType.DateTime);
-                parameters.Add("@Cust_reg_branch", customer_mst.Cust_reg_branch, DbType.String);
-                parameters.Add("@Last_updated_by", customer_mst.Last_updated_by, DbType.String);
+                parameters.Add("@Cust_reg_module", "M", DbType.String);
+                parameters.Add("@Cust_reg_UserId", customer_mst.Userid, DbType.String);
+                parameters.Add("@Cust_reg_date", servertime, DbType.DateTime);
+                parameters.Add("@Cust_reg_branch", customer_mst.Branchcode, DbType.String);
+                parameters.Add("@Last_updated_by", customer_mst.Userid, DbType.String);
                 parameters.Add("@Last_updated_date", servertime, DbType.DateTime);
-                parameters.Add("@aml_score", customer_mst.aml_score, DbType.String);                
+                parameters.Add("@aml_score", "", DbType.String);                
                 parameters.Add("@IdTypeCode", customer_mst.IdTypeCode, DbType.String);
                 parameters.Add("@IdType", customer_mst.IdType, DbType.String);
                 parameters.Add("@IdNo", customer_mst.IdNo, DbType.String);
-                parameters.Add("@IssueDate", customer_mst.IssueDate, DbType.Date);
+                parameters.Add("@IssueDate", servertime, DbType.Date);
                 parameters.Add("@ExpDate", customer_mst.ExpDate, DbType.Date);
-                parameters.Add("@Issueplace", customer_mst.Issueplace, DbType.String);
+                parameters.Add("@Issueplace", "", DbType.String);
                 parameters.Add("@ImageFront", customer_mst.ImageFront, DbType.String);
                 parameters.Add("@ImageBack", customer_mst.ImageBack, DbType.String);
                 parameters.Add("@ID_Activeflg", "Y", DbType.String);
                 parameters.Add("@IssueContcode", customer_mst.IssueContcode, DbType.String);
-                parameters.Add("@IdRemarks", customer_mst.IdRemarks, DbType.String);
+                parameters.Add("@IdRemarks", "", DbType.String);
                 parameters.Add("@Idcollected", "Y", DbType.String);
-                parameters.Add("@Primary_Id", customer_mst.Primary_Id, DbType.String);
-                parameters.Add("@Occupation", customer_mst.Occupation, DbType.String);
-                parameters.Add("EditOrInsert", "Insert", DbType.String);
+                parameters.Add("@Primary_Id", "Y", DbType.String);
+                //parameters.Add("@Occupation", "", DbType.String);
+                parameters.Add("@EditOrInsert", "Insert", DbType.String);
                 parameters.Add("@SuccessMsg", dbType: DbType.String, direction: ParameterDirection.Output, size: 100);
 
                 var rval = await this.unitOfWork.Connection.ExecuteAsync(sql, parameters, unitOfWork.Transaction, 180);
@@ -148,74 +146,74 @@ namespace ForexDataService
             {
                 var parameters = new DynamicParameters();
                 parameters.Add("@Custcode", customer_mst.Custcode, DbType.String);
-                parameters.Add("@Custtype", customer_mst.Custtype, DbType.String);
-                parameters.Add("@CustomerGroup", customer_mst.CustomerGroup, DbType.String);
-                parameters.Add("@Name1", customer_mst.Name1, DbType.String);
-                parameters.Add("@Name2", customer_mst.Name2, DbType.String);
-                parameters.Add("@Name3", customer_mst.Name3, DbType.String);
-                parameters.Add("@Name4", customer_mst.Name4, DbType.String);
-
+                parameters.Add("@Custtype", "I", DbType.String);
+                parameters.Add("@CustomerGroup", customer_mst.CustomerGroup.ToUpper(), DbType.String);
+                parameters.Add("@Name1", customer_mst.Name1.ToUpper(), DbType.String);
+                parameters.Add("@Name2", customer_mst.Name2.ToUpper(), DbType.String);
+                parameters.Add("@Name3", customer_mst.Name3.ToUpper(), DbType.String);
+                parameters.Add("@Name4", "", DbType.String);
                 parameters.Add("@Cell1", customer_mst.Cell1, DbType.String);
-                parameters.Add("@Cell2", customer_mst.Cell2, DbType.String);
-                parameters.Add("@Phone", customer_mst.Phone, DbType.String);
+                parameters.Add("@Cell2", "", DbType.String);
+                parameters.Add("@Phone", "", DbType.String);
                 parameters.Add("@Gender", customer_mst.Gender, DbType.String);
                 parameters.Add("@Dob", customer_mst.Dob, DbType.DateTime);
-                parameters.Add("@Adrees1", customer_mst.Adrees1, DbType.String);
-                parameters.Add("@Adrees2", customer_mst.Adrees2, DbType.String);
-                parameters.Add("@Place", customer_mst.Place, DbType.String);
-                parameters.Add("@Street", customer_mst.Street, DbType.String);
-                parameters.Add("@City", customer_mst.City, DbType.String);
-                parameters.Add("@State", customer_mst.State, DbType.String);
+                parameters.Add("@Adrees1", customer_mst.Adrees1.ToUpper(), DbType.String);
+                parameters.Add("@Adrees2", customer_mst.Adrees2.ToUpper(), DbType.String);
+                parameters.Add("@Place", "", DbType.String);
+                parameters.Add("@Street", "", DbType.String);
+                parameters.Add("@City", "", DbType.String);
+                parameters.Add("@State", "", DbType.String);
                 parameters.Add("@Concode", customer_mst.Concode, DbType.String);
-                parameters.Add("@Country", customer_mst.Country, DbType.String);
-                parameters.Add("@Pobox", customer_mst.Pobox, DbType.String);
+                parameters.Add("@Country", "", DbType.String);
+                parameters.Add("@Pobox", "", DbType.String);
                 parameters.Add("@Nationcode", customer_mst.Nationcode, DbType.String);
                 parameters.Add("@Nationality", customer_mst.Nationality, DbType.String);
                 parameters.Add("@Profession", customer_mst.Profession, DbType.String);
                 parameters.Add("@Mail", customer_mst.Mail, DbType.String);
-                parameters.Add("@Fax", customer_mst.Fax, DbType.String);
-                parameters.Add("@Company", customer_mst.Company, DbType.String);
-                parameters.Add("@Remarks", customer_mst.Remarks, DbType.String);
-                parameters.Add("@Remark2", customer_mst.Remark2, DbType.String);
-                parameters.Add("@Risktype", customer_mst.Risktype, DbType.String);
-                parameters.Add("@Amltype", customer_mst.Amltype, DbType.String);
-                parameters.Add("@Activeflg", customer_mst.Activeflg.ToUpper(), DbType.String);
+                parameters.Add("@Fax", "", DbType.String);
+                parameters.Add("@Activeflg", "Y", DbType.String);
                 parameters.Add("@Userid", customer_mst.Userid.ToUpper(), DbType.String);
                 parameters.Add("@Branchcode", customer_mst.Branchcode.ToUpper(), DbType.String);
+                parameters.Add("@Company", customer_mst.Company.ToUpper(), DbType.String);
                 parameters.Add("@Photo", customer_mst.Photo, DbType.String);
-                parameters.Add("@Amldoc_collected", customer_mst.Amldoc_collected, DbType.String);
-                parameters.Add("@Aml_auth", customer_mst.Aml_auth, DbType.String);
-                parameters.Add("@Aml_auth_user", customer_mst.Aml_auth_user, DbType.String);
-                parameters.Add("@Regdate", servertime, DbType.Date);
-                
-                parameters.Add("@PEP", customer_mst.PEP.ToUpper(), DbType.String);
-                parameters.Add("@Allow_Forex", customer_mst.Allow_Forex, DbType.Boolean);
-                parameters.Add("@Allow_Remit", customer_mst.Allow_Remit, DbType.Boolean);
-                parameters.Add("@Allow_Incoming", customer_mst.Allow_Incoming, DbType.Boolean);
-                parameters.Add("@Allow_Mobile", customer_mst.Allow_Mobile, DbType.Boolean);
-                parameters.Add("@Residence", customer_mst.Residence, DbType.String);
+                parameters.Add("@Amldoc_collected", "N", DbType.String);
+                parameters.Add("@Risktype", "LOW", DbType.String);
+                parameters.Add("@Amltype", "LOW", DbType.String);
+                parameters.Add("@Aml_auth", "N", DbType.String);
+                parameters.Add("@Aml_auth_user", "", DbType.String);
+                parameters.Add("@Remarks", "", DbType.String);
+                parameters.Add("@Remark2", "", DbType.String);
+                parameters.Add("@Regdate", servertime, DbType.DateTime);
 
-                parameters.Add("@Cust_reg_module", customer_mst.Cust_reg_module, DbType.String);
-                parameters.Add("@Cust_reg_UserId", customer_mst.Cust_reg_UserId, DbType.String);
-                parameters.Add("Cust_reg_date", servertime, DbType.DateTime);
-                parameters.Add("@Cust_reg_branch", customer_mst.Cust_reg_branch, DbType.String);
-                parameters.Add("@Last_updated_by", customer_mst.Last_updated_by, DbType.String);
+                parameters.Add("@PEP", "N", DbType.String);
+                parameters.Add("@Allow_Forex", true, DbType.Boolean);
+                parameters.Add("@Allow_Remit", true, DbType.Boolean);
+                parameters.Add("@Allow_Incoming", true, DbType.Boolean);
+                parameters.Add("@Allow_Mobile", true, DbType.Boolean);
+                parameters.Add("@Residence", "", DbType.String);
+
+                parameters.Add("@Cust_reg_module", "M", DbType.String);
+                parameters.Add("@Cust_reg_UserId", customer_mst.Userid, DbType.String);
+                parameters.Add("@Cust_reg_date", servertime, DbType.DateTime);
+                parameters.Add("@Cust_reg_branch", customer_mst.Branchcode, DbType.String);
+                parameters.Add("@Last_updated_by", customer_mst.Userid, DbType.String);
                 parameters.Add("@Last_updated_date", servertime, DbType.DateTime);
-                parameters.Add("@aml_score", customer_mst.aml_score, DbType.String);
+                parameters.Add("@aml_score", "", DbType.String);
                 parameters.Add("@IdTypeCode", customer_mst.IdTypeCode, DbType.String);
-                parameters.Add("@IdNo", customer_mst.IdNo, DbType.String);
                 parameters.Add("@IdType", customer_mst.IdType, DbType.String);
-                parameters.Add("@IssueDate", customer_mst.IssueDate, DbType.Date);
+                parameters.Add("@IdNo", customer_mst.IdNo, DbType.String);
+                parameters.Add("@IssueDate", servertime, DbType.Date);
                 parameters.Add("@ExpDate", customer_mst.ExpDate, DbType.Date);
-                parameters.Add("@Issueplace", customer_mst.Issueplace, DbType.String);
+                parameters.Add("@Issueplace", "", DbType.String);
                 parameters.Add("@ImageFront", customer_mst.ImageFront, DbType.String);
                 parameters.Add("@ImageBack", customer_mst.ImageBack, DbType.String);
                 parameters.Add("@ID_Activeflg", "Y", DbType.String);
                 parameters.Add("@IssueContcode", customer_mst.IssueContcode, DbType.String);
-                parameters.Add("@IdRemarks", customer_mst.IdRemarks, DbType.String);
+                parameters.Add("@IdRemarks", "", DbType.String);
                 parameters.Add("@Idcollected", "Y", DbType.String);
-                parameters.Add("@Primary_Id", customer_mst.Primary_Id, DbType.String);
-                parameters.Add("@Occupation", customer_mst.Occupation, DbType.String);
+                parameters.Add("@Primary_Id", "Y", DbType.String);
+                //parameters.Add("@Occupation", "", DbType.String);
+               
                 parameters.Add("@EditOrInsert", "Edit", DbType.String);
                 parameters.Add("@SuccessMsg", dbType: DbType.String, direction: ParameterDirection.Output, size: 100);
 

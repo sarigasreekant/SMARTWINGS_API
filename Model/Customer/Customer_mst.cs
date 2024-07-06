@@ -37,13 +37,13 @@ namespace ForexModel
 
         public string State { get; set; } = "";
 
-        public string? Concode { get; set; } 
+        public string? Concode { get; set; }
 
         public string? Country { get; set; }
 
         public string Pobox { get; set; } = "";
 
-        public string? Nationcode { get; set; } 
+        public string? Nationcode { get; set; }
 
         public string? Nationality { get; set; }
 
@@ -93,16 +93,16 @@ namespace ForexModel
         public string Residence { get; set; } = "";
 
         public string FullName { get; set; } = "";
-        public string? IdTypeCode { get; set; } 
+        public string? IdTypeCode { get; set; }
         public string IdNo { get; set; } = "";
         public string IdType { get; set; } = string.Empty;
         public DateTime? IssueDate { get; set; }
         public DateTime? ExpDate { get; set; }
         public string Issueplace { get; set; } = string.Empty;
-        public string? IssueContcode { get; set; } 
+        public string? IssueContcode { get; set; }
         public string IdRemarks { get; set; } = string.Empty;
         public string Primary_Id { get; set; } = "Y";
-        public string ImageFront { get; set; } = string.Empty;        
+        public string ImageFront { get; set; } = string.Empty;
         public string ImageBack { get; set; } = string.Empty;
     }
     public class CustomerValidator : AbstractValidator<Customer_mst>
