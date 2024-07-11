@@ -2,7 +2,7 @@
 using DataAccess;
 using ForexDataService;
 using ForexModel;
-using MathNet.Numerics.RootFinding;
+//using MathNet.Numerics.RootFinding;
 using System.Data;
 
 namespace ForexDataService

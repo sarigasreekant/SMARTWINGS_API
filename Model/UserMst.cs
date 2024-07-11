@@ -13,16 +13,17 @@ namespace ForexModel
 
         [Required]
         public string BranchCode { get; set; } = String.Empty;
-        [Required]
+        [Required(ErrorMessage ="username is a required field")]
         [StringLength(10)]
         public string UserID { get; set; } = String.Empty;
-        [Required]
+        [Required(ErrorMessage ="password is a required field")]
         [StringLength(30)]
         public string Password { get; set; } = String.Empty;
         [Required]
         [StringLength(100)]
         public string FullName { get; set; } = String.Empty;
         [Required]
+
         public int UserGroup { get; set; } = 0;
         [StringLength(50)]
 

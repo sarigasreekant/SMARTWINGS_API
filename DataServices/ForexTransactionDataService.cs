@@ -481,57 +481,57 @@ namespace SMARTWINGS_API.DataServices
 
 
 
-        public async Task<int> SaveRemittancePay(RemittancePayment remitpay)
-        {
-            // need to pass DTO List add loop here 
+        //public async Task<int> SaveRemittancePay(RemittancePayment remitpay)
+        //{
+        //    // need to pass DTO List add loop here 
 
 
-            var parameters = new DynamicParameters();
-            parameters.Add("@PortalCode", "00001", DbType.String);
-            parameters.Add("@OrgCode", "00001", DbType.String);
-            parameters.Add("@MenuCode", "00000", DbType.String);
-            parameters.Add("@RefNo", remitpay.RefNo, DbType.String);
-            parameters.Add("@TranDate", remitpay.TranDate, DbType.DateTime);
-            parameters.Add("@PayRefNo", remitpay.PayRefNo, DbType.String);
-            parameters.Add("@UserCode", remitpay.UserCode, DbType.String);
-            parameters.Add("@PayCode", remitpay.PayCode, DbType.String);
-            parameters.Add("@AccountCode", remitpay.AccountCode, DbType.String);
-            parameters.Add("@PayAmount", remitpay.PayAmount, DbType.Decimal);
-            parameters.Add("@Rate", remitpay.Rate, DbType.Decimal);
-            parameters.Add("@PaidAmount", remitpay.PaidAmount, DbType.Decimal);
-            parameters.Add("@BalAmount", remitpay.BalAmount, DbType.Decimal);
-            parameters.Add("@Discount", remitpay.Discount, DbType.Decimal);
-            parameters.Add("@Pay_ID", remitpay.Pay_ID, DbType.Int32);
-            parameters.Add("@PayCodeName", remitpay.PayCodeName, DbType.String);
-            parameters.Add("@BankCode", remitpay.BankCode, DbType.String);
-            parameters.Add("@BankName", remitpay.BankName, DbType.String);
-            parameters.Add("@CardCharge", remitpay.CardCharge, DbType.Decimal);
-            parameters.Add("@CheqDt", remitpay.CheqDt, DbType.DateTime);
-            parameters.Add("@TotalDeno", remitpay.TotalDeno, DbType.Decimal);
-            parameters.Add("@TotalDenoAmt", remitpay.TotalDenoAmt, DbType.Decimal);
-            parameters.Add("@BalanceCashPay", remitpay.BalanceCashPay, DbType.Decimal);
-            parameters.Add("@PayCurCode", remitpay.PayCurCode, DbType.String);
-            parameters.Add("@PayCurName", remitpay.PayCurName, DbType.String);
-            parameters.Add("@USDAmount", remitpay.USDAmount, DbType.Decimal);
-            parameters.Add("@USDBalAmount", remitpay.USDBalAmount, DbType.Decimal);
-            parameters.Add("@IsDenoRqd", remitpay.IsDenoRqd, DbType.Boolean);
-            parameters.Add("@IsUSDRqd", remitpay.IsUSDRqd, DbType.Boolean);
-            parameters.Add("@USDRate", remitpay.USDRate, DbType.Decimal);
+        //    var parameters = new DynamicParameters();
+        //    parameters.Add("@PortalCode", "00001", DbType.String);
+        //    parameters.Add("@OrgCode", "00001", DbType.String);
+        //    parameters.Add("@MenuCode", "00000", DbType.String);
+        //    parameters.Add("@RefNo", remitpay.RefNo, DbType.String);
+        //    parameters.Add("@TranDate", remitpay.TranDate, DbType.DateTime);
+        //    parameters.Add("@PayRefNo", remitpay.PayRefNo, DbType.String);
+        //    parameters.Add("@UserCode", remitpay.UserCode, DbType.String);
+        //    parameters.Add("@PayCode", remitpay.PayCode, DbType.String);
+        //    parameters.Add("@AccountCode", remitpay.AccountCode, DbType.String);
+        //    parameters.Add("@PayAmount", remitpay.PayAmount, DbType.Decimal);
+        //    parameters.Add("@Rate", remitpay.Rate, DbType.Decimal);
+        //    parameters.Add("@PaidAmount", remitpay.PaidAmount, DbType.Decimal);
+        //    parameters.Add("@BalAmount", remitpay.BalAmount, DbType.Decimal);
+        //    parameters.Add("@Discount", remitpay.Discount, DbType.Decimal);
+        //    parameters.Add("@Pay_ID", remitpay.Pay_ID, DbType.Int32);
+        //    parameters.Add("@PayCodeName", remitpay.PayCodeName, DbType.String);
+        //    parameters.Add("@BankCode", remitpay.BankCode, DbType.String);
+        //    parameters.Add("@BankName", remitpay.BankName, DbType.String);
+        //    parameters.Add("@CardCharge", remitpay.CardCharge, DbType.Decimal);
+        //    parameters.Add("@CheqDt", remitpay.CheqDt, DbType.DateTime);
+        //    parameters.Add("@TotalDeno", remitpay.TotalDeno, DbType.Decimal);
+        //    parameters.Add("@TotalDenoAmt", remitpay.TotalDenoAmt, DbType.Decimal);
+        //    parameters.Add("@BalanceCashPay", remitpay.BalanceCashPay, DbType.Decimal);
+        //    parameters.Add("@PayCurCode", remitpay.PayCurCode, DbType.String);
+        //    parameters.Add("@PayCurName", remitpay.PayCurName, DbType.String);
+        //    parameters.Add("@USDAmount", remitpay.USDAmount, DbType.Decimal);
+        //    parameters.Add("@USDBalAmount", remitpay.USDBalAmount, DbType.Decimal);
+        //    parameters.Add("@IsDenoRqd", remitpay.IsDenoRqd, DbType.Boolean);
+        //    parameters.Add("@IsUSDRqd", remitpay.IsUSDRqd, DbType.Boolean);
+        //    parameters.Add("@USDRate", remitpay.USDRate, DbType.Decimal);
 
 
-            try
-            {
-                string sql = @"USP_VN_TRN_INSERT_PAYMODE";
+        //    try
+        //    {
+        //        string sql = @"USP_VN_TRN_INSERT_PAYMODE";
 
-                var rval = await unitOfWork.Connection.ExecuteAsync(sql, parameters, unitOfWork.Transaction, 180);
+        //        var rval = await unitOfWork.Connection.ExecuteAsync(sql, parameters, unitOfWork.Transaction, 180);
 
-                return rval;
-            }
-            catch (Exception ex)
-            {
-                throw ex;
-            }
-        }
+        //        return rval;
+        //    }
+        //    catch (Exception ex)
+        //    {
+        //        throw ex;
+        //    }
+        //}
         public async Task<int> SaveIncomingPay(IncomingPay remitpay)
         {
 

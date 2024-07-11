@@ -88,6 +88,29 @@ namespace DHBForexAPI
 
 
         }
-           
+        [HttpGet("CheckAcNumberExistOrNot/{param1}/{param2}")]
+        public async Task<ActionResult<string>> CheckAcNumberExistOrNot(string param1, string param2)
+        {
+
+            try
+            {
+                var result = await _remitServiceProfileDatatService.CheckAcNumberExistOrNot(param1, param2);
+
+                if (result == null)
+                {
+                    return NotFound();
+                }
+
+                return Ok(result);
+            }
+            catch (Exception ex)
+            {
+                _logger.LogError(ex.ToString());
+                return StatusCode(StatusCodes.Status500InternalServerError,
+                   "Error retrieving data from the database");
+            }
+
+        }
+
     }
 }

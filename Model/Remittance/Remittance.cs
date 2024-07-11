@@ -17,7 +17,8 @@ namespace ForexModel
         public string ServiceCountry { get; set; } = "";
         public string ServiceCountryCode { get; set; } = "";
         public string ServiceCurrency { get; set; } = "";
-        public string ServiceCurrencyCode { get; set; } = "";
+        [Required(ErrorMessage ="Currency is required")]
+        public string ServiceCurrencyCode { get; set; } 
         public string ServiceServiceName { get; set; } = "";
         public string ServiceServiceCode { get; set; } = "";    
         public string ServiceCorresOrgcode { get; set; } = "";
@@ -47,6 +48,7 @@ namespace ForexModel
         public string Nationality { get; set; } = "";
         public string Profession { get; set; } = "";
         public string Mail { get; set; } = "";
+
         public string Fax { get; set; } = "";
         public string Company { get; set; } = "";
         public string Photo { get; set; } = "";
@@ -98,6 +100,7 @@ namespace ForexModel
         public string BenfBankAddress { get; set; } = "";
         public string BenefBankCity { get; set; } = "";
         public string BenfRemarks { get; set; } = "";
+        [Range(1, int.MaxValue,ErrorMessage ="Amount should not be 0")]
         public decimal FcyAmount { get; set; } = 0;
         public decimal Rate { get; set; } = 0;
         public decimal LcyAmount { get; set; } = 0;
@@ -136,8 +139,10 @@ namespace ForexModel
         public DateTime HOAuthDate { get; set; } = System.DateTime.Now;
         public string Occupation { get; set; } = "";
         public string Residence { get; set; } = "";
-        public string Purpose { get; set; } = "";
-        public string Source { get; set; } = "";
+        [Required(ErrorMessage ="Purpose is required")]
+        public string Purpose { get; set; }
+        [Required(ErrorMessage = "Source is required")]
+        public string Source { get; set; } 
         public string PurposeDtl { get; set; } = "";
         public string SourceDtl { get; set; } = "";
         public string RoutingBankCode { get; set; } = "";

@@ -35,7 +35,8 @@ namespace DHBForexAPI
                 {
                     UserMst varnull = new UserMst();
                     varnull.IsScucess = false;
-                    return Ok(varnull);
+                    //return Ok(varnull);
+                    return Ok("No such User");
                 }
 
                 return Ok(result);
@@ -48,54 +49,54 @@ namespace DHBForexAPI
             }
 
         }
-        [HttpPost("SaveUser")]
-        public async Task<ActionResult<int>> SaveUser(UserMst user)
-        {
-            try
-            {
-                if (user == null)
-                {
-                    return BadRequest();
-                }
+        //[HttpPost("SaveUser")]
+        //public async Task<ActionResult<int>> SaveUser(UserMst user)
+        //{
+        //    try
+        //    {
+        //        if (user == null)
+        //        {
+        //            return BadRequest();
+        //        }
 
 
-                var result = await _userMstDataService.SaveUser(user);
-                return Ok(result);
-
-
-
-            }
-            catch (Exception ex)
-            {
-                _logger.LogError(ex.ToString());
-                return StatusCode(StatusCodes.Status500InternalServerError,
-                   "Error saving data");
-            }
-        }
-        [HttpPost("DeleteUser")]
-        public async Task<ActionResult<int>> DeleteUser(string UserID)
-        {
-            try
-            {
-                if (UserID == null)
-                {
-                    return BadRequest();
-                }
-
-
-                var result = await _userMstDataService.DeleteUser(UserID);
-                return Ok(result);
+        //        var result = await _userMstDataService.SaveUser(user);
+        //        return Ok(result);
 
 
 
-            }
-            catch (Exception ex)
-            {
-                _logger.LogError(ex.ToString());
-                return StatusCode(StatusCodes.Status500InternalServerError,
-                   "Error saving data");
-            }
-        }
+        //    }
+        //    catch (Exception ex)
+        //    {
+        //        _logger.LogError(ex.ToString());
+        //        return StatusCode(StatusCodes.Status500InternalServerError,
+        //           "Error saving data");
+        //    }
+        //}
+        //[HttpPost("DeleteUser")]
+        //public async Task<ActionResult<int>> DeleteUser(string UserID)
+        //{
+        //    try
+        //    {
+        //        if (UserID == null)
+        //        {
+        //            return BadRequest();
+        //        }
+
+
+        //        var result = await _userMstDataService.DeleteUser(UserID);
+        //        return Ok(result);
+
+
+
+        //    }
+        //    catch (Exception ex)
+        //    {
+        //        _logger.LogError(ex.ToString());
+        //        return StatusCode(StatusCodes.Status500InternalServerError,
+        //           "Error saving data");
+        //    }
+        //}
        
         [HttpGet("Login/{UserId}/{Password}")]
         [AllowAnonymous]
@@ -110,7 +111,9 @@ namespace DHBForexAPI
                 {
                     UserMst varnull = new UserMst();
                     varnull.IsScucess = false;
-                    return Ok(varnull);
+                    var message= "Username Or Password is Incorrect";
+                    return Ok(message);
+                    //return Ok(varnull);
                 }
                 string Token = JwtAuthenticationManager.GenerateJwtToken(result);
                 result.JWTToken = Token;
@@ -147,34 +150,34 @@ namespace DHBForexAPI
             }
 
         }
-        [HttpGet("MenuPermitted/{MenuID}/{UserGroup}")]
-        [AllowAnonymous]
-        public async Task<ActionResult<bool>> IsMenuPermitted([FromRoute] string MenuID, string UserGroup)
-        {
+        //[HttpGet("MenuPermitted/{MenuID}/{UserGroup}")]
+        //[AllowAnonymous]
+        //public async Task<ActionResult<bool>> IsMenuPermitted([FromRoute] string MenuID, string UserGroup)
+        //{
 
-            try
-            {
-                if (String.IsNullOrEmpty(MenuID))
-                    MenuID = "0";
-                if (String.IsNullOrEmpty(UserGroup))
-                    UserGroup = "0";
-                var result = await _userMstDataService.IsMenuPermitted(Convert.ToInt32(MenuID), UserGroup);
+        //    try
+        //    {
+        //        if (String.IsNullOrEmpty(MenuID))
+        //            MenuID = "0";
+        //        if (String.IsNullOrEmpty(UserGroup))
+        //            UserGroup = "0";
+        //        var result = await _userMstDataService.IsMenuPermitted(Convert.ToInt32(MenuID), UserGroup);
 
-                if (result == false)
-                {
-                    return Ok(false);
-                }
+        //        if (result == false)
+        //        {
+        //            return Ok(false);
+        //        }
 
-                return Ok(true);
-            }
-            catch (Exception ex)
-            {
-                _logger.LogError(ex.ToString());
-                return StatusCode(StatusCodes.Status500InternalServerError,
-                   "Error retrieving data from the database");
-            }
+        //        return Ok(true);
+        //    }
+        //    catch (Exception ex)
+        //    {
+        //        _logger.LogError(ex.ToString());
+        //        return StatusCode(StatusCodes.Status500InternalServerError,
+        //           "Error retrieving data from the database");
+        //    }
 
-        }
+        //}
         [HttpGet("TwoFactorAut/{UserId}/{Viptoken}")]
         public async Task<ActionResult<string>> TwoFactorAut([FromRoute] string UserId, string Viptoken)
         {

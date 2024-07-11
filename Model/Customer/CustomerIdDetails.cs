@@ -20,7 +20,7 @@ namespace ForexModel
         [StringLength(50)]
        
         public string IdNo { get; set; } = string.Empty;
-        public DateTime? IssueDate { get; set; }
+        public DateTime? IssueDate { get; set; }=DateTime.Now;
      
         public DateTime? ExpDate { get; set; }
         [StringLength(100)]
@@ -43,7 +43,7 @@ namespace ForexModel
         public string Idcollected { get; set; } = "Y";
         public string ImageFrontUrl { get; set; } = string.Empty;
         public string ImageImageBackUrl { get; set; } = string.Empty;
-        public string Primary_Id { get; set; } = "N";
+        public string Primary_Id { get; set; } = "Y";
 
     }
     public class CustIDValidator : AbstractValidator<CustomerIdDetails>

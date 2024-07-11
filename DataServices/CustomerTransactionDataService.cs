@@ -249,6 +249,72 @@ namespace ForexDataService
 
 
         }
+        public async Task<string> SaveCustomerIdDetails(CustomerIdDetails customeriddetails)
+        {
+            //await this.DeleteCustomerIdDetails(customeriddetails.Custcode, customeriddetails.IdTypeCode);
+
+            string sql = @"USP_VN_MAS_CUSTOMER_ID_DETAILS";
+            var parameters = new DynamicParameters();
+            parameters.Add("@Custcode", customeriddetails.Custcode, DbType.String);
+            parameters.Add("@IdTypeCode", customeriddetails.IdTypeCode, DbType.String);
+            parameters.Add("@IdType", customeriddetails.IdType, DbType.String);
+            parameters.Add("@IdNo", customeriddetails.IdNo, DbType.String);
+            parameters.Add("@IssueDate", customeriddetails.IssueDate, DbType.Date);
+            parameters.Add("@ExpDate", customeriddetails.ExpDate, DbType.Date);
+            parameters.Add("@Issueplace", customeriddetails.Issueplace, DbType.String);
+            parameters.Add("@ImageFront", customeriddetails.ImageFront, DbType.String);
+            parameters.Add("@ImageBack", customeriddetails.ImageBack, DbType.String);
+            parameters.Add("@Activeflg", customeriddetails.Activeflg, DbType.String);
+            parameters.Add("@IssueContcode", customeriddetails.IssueContcode, DbType.String);
+            parameters.Add("@Remarks", customeriddetails.Remarks, DbType.String);
+            parameters.Add("@Idcollected", customeriddetails.Idcollected, DbType.String);
+            parameters.Add("@Primary_Id", customeriddetails.Primary_Id, DbType.String);
+            parameters.Add("EditOrInsert", "Insert", DbType.String);
+
+            var rval = await this.unitOfWork.Connection.ExecuteScalarAsync<string>(sql, parameters,unitOfWork.Transaction,180);
+
+            return rval;
+        }
+
+        public async Task<int> SaveUser(UserMst usermst)
+        {
+            try
+            {
+
+                string sql = @" INSERT INTO UserMst_MobileApp(OrgCode, BranchCode, UserID,Password, FullName, UserGroup, MobileNo, VIPToken, 
+                            ActiveFlag, PhotoUrl, Email, AccuntNo, AccuntNoExceNo, CreatedDate,UserType) VALUES (@OrgCode, @BranchCode, 
+                            @UserID, @Password, @FullName, @UserGroup, @MobileNo, @VIPToken, @ActiveFlag, @PhotoUrl, @Email,
+                            @AccuntNo, @AccuntNoExceNo, @CreatedDate,@UserType)";
+
+
+
+                var parameters = new DynamicParameters();
+                string Pass = Helper.Cryptography.Encrypt(usermst.Password.ToUpper().Trim());
+                parameters.Add("@OrgCode", usermst.OrgCode, DbType.String);
+                parameters.Add("@BranchCode", usermst.BranchCode, DbType.String);
+                parameters.Add("@UserID", usermst.UserID.ToUpper().Trim(), DbType.String);
+                parameters.Add("@Password", Pass, DbType.String);
+                parameters.Add("@FullName", usermst.FullName.ToUpper(), DbType.String);
+                parameters.Add("@UserGroup", usermst.UserGroup, DbType.Int32);
+                parameters.Add("@MobileNo", usermst.MobileNo, DbType.String);
+                parameters.Add("@VIPToken", usermst.VIPToken, DbType.String);
+                parameters.Add("@ActiveFlag", usermst.ActiveFlag, DbType.String);
+                parameters.Add("@PhotoUrl", usermst.PhotoUrl, DbType.String);
+                parameters.Add("@Email", usermst.Email, DbType.String);
+                parameters.Add("@AccuntNo", usermst.AccuntNo, DbType.String);
+                parameters.Add("@AccuntNoExceNo", usermst.AccuntNoExceNo, DbType.String);
+                parameters.Add("@CreatedDate", usermst.CreatedDate, DbType.DateTime);
+                parameters.Add("@UserType", "N", DbType.String);
+                var userval = await this.unitOfWork.Connection.ExecuteScalarAsync<int>(sql, parameters,unitOfWork.Transaction,180);
+
+                return userval;
+            }
+            catch (Exception ex)
+            {
+
+                throw;
+            }
+        }
         public static DateTime ServerDateTime()
         {
             string ServerTimeZone = "04:00";
@@ -311,6 +377,9 @@ namespace ForexDataService
     {
         Task<CustomerResponse> SaveCustomer(Customer_mst customer_mst);
         Task<CustomerResponse> EditCustomer(Customer_mst customer_mst);
+        Task<string> SaveCustomerIdDetails(CustomerIdDetails customeriddetails);
+
+        Task<int> SaveUser(UserMst usermst);
 
     }
 }

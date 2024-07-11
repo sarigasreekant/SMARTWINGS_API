@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.ComponentModel.DataAnnotations;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
@@ -107,5 +108,6 @@ namespace ForexModel
         public string Primary_Id { get; set; } = "N";
         public string ImageFront { get; set; } = string.Empty;
         public string ImageBack { get; set; } = string.Empty;
+        
     }
 }

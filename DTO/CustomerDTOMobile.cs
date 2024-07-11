@@ -8,13 +8,13 @@ namespace ForexModel
 
         public string? Custtype { get; set; } = "I";
         public string CustomerGroup { get; set; } = "";
-        [Required]
+        [Required(ErrorMessage ="First name is required")]
         public string Name1 { get; set; }
-
-        public string Name2 { get; set; } = "";
-
-        public string Name3 { get; set; } = "";
-        [Required]
+        [Required(ErrorMessage = "Middle name is required")]
+        public string Name2 { get; set; }
+        [Required(ErrorMessage = "Last name is required")]
+        public string Name3 { get; set; }
+        [Required(ErrorMessage ="Phone Number is required")]
         public string Cell1 { get; set; }
         public string Mail { get; set; } = "";
         public string? Gender { get; set; }
@@ -45,21 +45,23 @@ namespace ForexModel
 
         public DateTime? Regdate { get; set; } = System.DateTime.Now;
 
-        [Required]
+        [Required(ErrorMessage ="ID Type is required")]
 
-        public string? IdTypeCode { get; set; }
-        [Required]
+        public string IdTypeCode { get; set; }
+        [Required(ErrorMessage ="ID number is required")]
         public string IdNo { get; set; } = "";
         public string IdType { get; set; } = string.Empty;
 
-        [Required]
+        [Required(ErrorMessage ="Expiry date is required")]
         public DateTime? ExpDate { get; set; }
 
-        [Required]
-        public string? IssueContcode { get; set; }
+        [Required(ErrorMessage ="Country is required")]
+        public string IssueContcode { get; set; }
 
         public string ImageFront { get; set; } = string.Empty;
         public string ImageBack { get; set; } = string.Empty;
+        
+       
     }
 
 

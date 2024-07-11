@@ -135,6 +135,29 @@ namespace ForexDataService
             }
 
         }
+
+        public async Task<string> CheckAcNumberExistOrNot(string param1, string param2)
+        {
+            try
+            {
+
+                string sql = @"USP_VN_GET_BENEFICIARY_ACCNO_EXISTS";
+
+                DynamicParameters parameter = new DynamicParameters();
+                parameter.Add("@BenefAccountNo", param1, DbType.String);
+                parameter.Add("@CustCode", param2, DbType.String);
+                parameter.Add("@Message", dbType: DbType.String, direction: ParameterDirection.Output, size: 100);
+                var Data = await Db.ExecuteScalarAsync<string>(sql, parameter);
+
+                return Data;
+            }
+            catch (Exception ex)
+            {
+                throw ex;
+            }
+
+
+        }
     }
 
     public interface IRemServiceProfileDataService
@@ -142,5 +165,6 @@ namespace ForexDataService
         Task<IEnumerable<RemServiceProfile>> GetServiceProfile(string custcode,string servcode);
         Task<RemServiceProfile> GetServiceProfilebyId(int servno);
         Task<int> SaveServiceProf(ServiceProfileDTO prof);
+        Task<string> CheckAcNumberExistOrNot(string param1, string param2);
     }
 }

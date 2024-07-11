@@ -145,5 +145,28 @@ namespace ForexDataService
                 throw ex;
             }
         }
+        public async Task<string> CheckNumberExistOrNot(string param1,string param2)
+        {
+            try
+            {
+
+                string sql = @"USP_VN_GET_CUSTOMER_PHONE_EXISTS";
+
+                DynamicParameters parameter = new DynamicParameters();
+                parameter.Add("@Cell1", param1, DbType.String);
+                parameter.Add("@Param", param2, DbType.String);
+                parameter.Add("@Message", dbType: DbType.String, direction: ParameterDirection.Output, size: 100);
+                var Data = await Db.ExecuteScalarAsync<string>(sql, parameter);
+
+                return Data;
+            }
+            catch (Exception ex)
+            {
+                throw ex;
+            }
+            
+
+        }
+
     }
 }
