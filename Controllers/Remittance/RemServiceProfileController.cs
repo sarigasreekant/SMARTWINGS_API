@@ -67,7 +67,7 @@ namespace DHBForexAPI
         }
         [HttpPost]
         [Route("SaveServiceProf")]
-        public async Task<ActionResult<CustomerResponse>> SaveServiceProf(ServiceProfileDTO servdto)
+        public async Task<ActionResult<CommanResponse>> SaveServiceProf(ServiceProfileDTO servdto)
         {
             try
             {
@@ -76,6 +76,7 @@ namespace DHBForexAPI
                     return BadRequest();
                 }
                 var result = await _remitServiceProfileDatatService.SaveServiceProf(servdto);
+                //return Ok("Success");
                 return Ok(result);
 
             }

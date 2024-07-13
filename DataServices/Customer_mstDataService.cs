@@ -50,6 +50,29 @@ namespace ForexDataService
                 throw ex;
             }
         }
+        public async Task<Customer_mst> GetCustomerByuserID(string UserId)
+        {
+            try
+            {
+                string sql = @"SELECT Custcode, Custtype,CustomerGroup, Name1, Name2, Name3, Cell1, Cell2, Phone, Gender, Dob, Adrees1, Adrees2, Place, 
+                            Street, City, State, Concode, Country, Pobox, Nationcode, Nationality, Profession, Mail, Fax, Activeflg, Userid, 
+                            Branchcode, Company, Photo, Amldoc_collected, Risktype, Amltype, Aml_auth, Aml_auth_user, Remarks, Remark2, Regdate,
+                            PEP, Allow_Forex, Allow_Remit, Allow_Incoming, Allow_Mobile, Residence, FullName, IdTypeCode, IdType, IdNo, IssueDate, 
+                            ExpDate, Issueplace, ImageFront, ImageBack, ID_Activeflg, IssueContcode, ID_Remarks, Idcollected, Name4
+                              FROM customer_mst WHERE IdNo= @IdNo and Cust_reg_module='M' ";
+
+                var parameters = new DynamicParameters();
+                parameters.Add("@IdNo", UserId, DbType.String);
+
+                var Data = await Db.QueryFirstOrDefaultAsync<Customer_mst>(sql, parameters);
+
+                return Data;
+            }
+            catch (Exception ex)
+            {
+                throw ex;
+            }
+        }
         public async Task<IEnumerable<Customer_mst>> Customer_mstSearch(string CustCode, string Mobile, string name, string IdNo)
         {
             DynamicParameters parameters = new DynamicParameters();

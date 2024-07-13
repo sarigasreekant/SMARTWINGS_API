@@ -12,5 +12,6 @@ namespace ForexDataService
 
         Task<IEnumerable<Customer_mst>> GetCustomerKYC(string Custcode);
         Task<string> CheckNumberExistOrNot(string param1,string param2);
+        Task<Customer_mst> GetCustomerByuserID(string UserId);
     }
 }

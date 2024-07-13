@@ -40,7 +40,7 @@ namespace ForexDataService
             return Data;
 
         }
-        public async Task<int> SaveServiceProf(ServiceProfileDTO prof)
+        public async Task<CommanResponse> SaveServiceProf(ServiceProfileDTO prof)
         {
             var pResponse = new CommanResponse();
             try
@@ -109,25 +109,28 @@ namespace ForexDataService
                 parameters.Add("@UserId", prof.UserCode, DbType.String);
                 parameters.Add("@CreatedDate", prof.CreatedDate, DbType.DateTime);
                 
-                //parameters.Add("@NewRefNo", dbType: DbType.Int64, direction: ParameterDirection.Output, size: 100);
+                parameters.Add("@NewRefNo", dbType: DbType.Int64, direction: ParameterDirection.Output, size: 100);
 
 
-                var rval = await Db.ExecuteAsyncStoredProcedure<int>(sql, parameters);
-                //string NewRefNo = parameters.Get<int>("NewRefNo");
-                //if (!string.IsNullOrEmpty(NewRefNo))
-                //{
-                //    pResponse.RefNo = NewRefNo;
-                //    pResponse.StatusMesage = "Saved Successfully";
-                //    pResponse.IsSucess = true;
-                //}
-                //else
-                //{
-                //    pResponse.RefNo = string.Empty;
-                //    pResponse.StatusMesage = "Data not Saved!!!";
-                //    pResponse.IsSucess = false;
+                var rval = await Db.ExecuteScalarAsyncExecuteAsyncStoredProcedure<int>(sql, parameters);
+                
+                //var NewRefNo = parameters.Get<int>("@NewRefNo");
+                if (rval>0)
+                {
+                    pResponse.RefNo = rval.ToString();
+                    pResponse.StatusMesage = "Saved Successfully";
+                    pResponse.IsSucess = true;
+                    pResponse.StatusCode = 200;
+                }
+                else
+                {
+                    pResponse.RefNo = string.Empty;
+                    pResponse.StatusMesage = "Data not Saved!!!";
+                    pResponse.IsSucess = false;
 
-                //}
-                return rval;
+                }
+                return pResponse;
+
             }
             catch (Exception ex) 
             {
@@ -164,7 +167,7 @@ namespace ForexDataService
     {
         Task<IEnumerable<RemServiceProfile>> GetServiceProfile(string custcode,string servcode);
         Task<RemServiceProfile> GetServiceProfilebyId(int servno);
-        Task<int> SaveServiceProf(ServiceProfileDTO prof);
+        Task<CommanResponse> SaveServiceProf(ServiceProfileDTO prof);
         Task<string> CheckAcNumberExistOrNot(string param1, string param2);
     }
 }

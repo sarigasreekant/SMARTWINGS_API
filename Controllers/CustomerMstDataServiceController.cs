@@ -52,7 +52,30 @@ namespace DHBForexAPI
 
                 if (result == null)
                 {
-                    return NotFound();
+                    return Ok("No such Customer");
+                    //return NotFound();
+                }
+
+                return Ok(result);
+            }
+            catch (Exception ex)
+            {
+                _logger.LogError(ex.ToString());
+                return StatusCode(StatusCodes.Status500InternalServerError,
+                   "Error retrieving data from the database");
+            }
+        }
+        [HttpGet("GetCustomerByuserID/{userId}")]
+        public async Task<ActionResult<Customer_mst>> GetCustomerByuserID([FromRoute] string userId)
+        {
+            try
+            {
+                var result = await _customer_mstDataService.GetCustomerByuserID(userId);
+
+                if (result == null)
+                {
+                    return Ok("No such Customer");
+                    //return NotFound();
                 }
 
                 return Ok(result);
